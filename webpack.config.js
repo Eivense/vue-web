@@ -8,6 +8,12 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
+  plugins:[
+    new webpack.ProvidePlugin({
+    jQuery: "jquery",
+    $: "jquery"
+    })
+  ],
   module: {
     rules: [
       {
@@ -25,12 +31,16 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(eot|ttf|woff|woff2|png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'
         }
-      }
+      },
+      {
+        test:/\.css$/,
+        use:['style-loader','css-loader']
+      },
     ]
   },
   resolve: {
